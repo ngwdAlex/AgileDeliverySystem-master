@@ -19,15 +19,16 @@ import javax.swing.JOptionPane;
  */
 public class CreateJob extends javax.swing.JFrame {
 //    public static ScheduleInterface<Schedule> scheduleQueue = new ScheduleQueue<>();
-    public static ScheduleInterface<Schedule> scheduleStack = new ModuleD.adt.ScheduleStack<>();
+    public static ScheduleInterface<Schedule> scheduleList = new ModuleD.adt.ScheduleList<>();
 //    public static ScheduleInterface<Schedule> scheduleList = new ScheduleList<>();
     public static OrderInterface<Order> orderList = new ModuleC.adt.OrderQueue<>();
-    public void setStack(ScheduleInterface<Schedule> scheduleStacking){
-        this.scheduleStack = scheduleStacking;
+    
+    public void setList(ScheduleInterface<Schedule> scheduleList){
+        this.scheduleList = scheduleList;
     }
     
     public ScheduleInterface<Schedule> getList(){
-        return this.scheduleStack;
+        return this.scheduleList;
     }
     
     
@@ -36,9 +37,6 @@ public class CreateJob extends javax.swing.JFrame {
      */
     public CreateJob() {
         initialize();
-        
-            
-        
         initComponents();
     }
 
@@ -58,10 +56,16 @@ public class CreateJob extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jcbOrderNo = new javax.swing.JComboBox();
         btnAssign = new javax.swing.JButton();
+        lblDeliverymanName = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jcbDeliveryman.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1234", "1245", "2654", "4561", "5979" }));
+        jcbDeliveryman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbDeliverymanActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -71,8 +75,6 @@ public class CreateJob extends javax.swing.JFrame {
 
         jLabel3.setText("Order Number:");
 
-        jcbOrderNo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "O001", "O003", "O004", "O008", " " }));
-
         btnAssign.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnAssign.setText("ASSIGN");
         btnAssign.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -81,48 +83,57 @@ public class CreateJob extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setText("Deliveryman Name:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jcbDeliveryman, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jcbOrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(0, 95, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jcbOrderNo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jcbDeliveryman, 0, 164, Short.MAX_VALUE)
+                            .addComponent(lblDeliverymanName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addGap(65, 65, 65)
                 .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbDeliveryman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcbDeliveryman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDeliverymanName, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcbOrderNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                .addGap(36, 36, 36)
                 .addComponent(btnAssign, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -141,11 +152,17 @@ public class CreateJob extends javax.swing.JFrame {
 
     private void btnAssignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAssignMouseClicked
         int deliveryman = jcbDeliveryman.getSelectedIndex();
+        //~~insert code for passing deliverymanNumber~~
         jcbDeliveryman.removeItemAt(deliveryman);
         int orderNo = jcbOrderNo.getSelectedIndex();
+        //~~insert code for passing orderNo~~
         jcbOrderNo.removeItemAt(orderNo);
         JOptionPane.showMessageDialog(null, "Delivery job has successfully assigned!");
     }//GEN-LAST:event_btnAssignMouseClicked
+
+    private void jcbDeliverymanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDeliverymanActionPerformed
+        //get selected item > display deliveryman name
+    }//GEN-LAST:event_jcbDeliverymanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,21 +205,72 @@ public class CreateJob extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox jcbDeliveryman;
     private javax.swing.JComboBox jcbOrderNo;
+    private javax.swing.JLabel lblDeliverymanName;
     // End of variables declaration//GEN-END:variables
 
     private void initialize(){
-        Schedule schedule;
-    
-        //generate item for deliveryman
-        for(int i = 0; i<;i++){ 
-            
+        Schedule initializeList1, initializeList2, initializeList3, initializeList4,initializeList5,
+                            initializeList6,initializeList7,initializeList8,initializeList9,
+                            initializeList10,initializeList11,initializeList12,initializeList13,
+                            initializeList14,initializeList15,initializeList16,initializeList17,
+                            initializeList18,initializeList19,initializeList20,initializeList21,initializeList22;
+                    initializeList1= new Schedule("A001","LimKH", 1629,"A01", "pewdiepie", "0162313212", "Delivering","5min");
+                    initializeList2= new Schedule("A002","LimKW", 1111,"A02", "MsTingTT", "012432434", "Delivering","5min");
+                    initializeList3= new Schedule("A003","LowSK",3456, "A03", "AhLiao", "01312321213", "Delivering","5min");
+                    initializeList4= new Schedule("A004","NgWD",9909, "A04", "Kazuma", "015213797", "Delivering","5min");     
+                    initializeList5= new Schedule("A005","LooJW",1233,"A05","Kalima","01124356","Delivering","5min");
+                    initializeList6= new Schedule("A006","LimJJ",1012,"A06", "LeongFoei", "01239909", "Delivering","5min");
+                    initializeList7= new Schedule("A007","MahHW",3757,"A07","KongKong","012283747","Delivering","5min");
+                    initializeList8= new Schedule("A008","LoiKH",9610,"A08","MigMing","012636383","Delivering","5min"); 
+                    initializeList9= new Schedule("A009","LimNF",5566,"A09","MsTing","0192726363","Delivering","5min");
+                    initializeList10= new Schedule("A010","LohKC",6969,"A10","KitKat","017265353","Delivering","5min");
+                    
+                    initializeList11= new Schedule("A011","LimKH", 1629,"A11", "Kari", "012213778", "Delivering","5min");
+                    initializeList12= new Schedule("A012","LimKW", 1111,"A12", "Yolo", "0162328212", "Delivering","5min");
+                    initializeList13= new Schedule("A013","LowSK", 3456,"A13", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList14= new Schedule("A015","LowSK", 3456,"A14", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList15= new Schedule("A016","LooJW", 1233,"A15", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList16= new Schedule("A017","LimJJ", 1012,"A16", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList17= new Schedule("A018","LimJJ", 1012,"A17", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList18= new Schedule("A019","LoiKH", 9610,"A18", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList19= new Schedule("A020","LimNF", 5566,"A19", "Hahaha", "0198377213", "Delivering","5min");
+                    initializeList20= new Schedule("A021","LimNF", 5566,"A20", "Hahaha", "0198377213", "Delivering","5min");
+                    
+                    //completed jobs
+                    initializeList21= new Schedule("A022","LimKH", 1629,"A21", "Doggo", "0198377213", "Completed","5min");
+                    initializeList22= new Schedule("A023","LimKH", 1629,"A22", "Cloud", "0198377213", "Completed","5min");
+        scheduleList.addSchedule(initializeList1);
+        scheduleList.addSchedule(initializeList2);
+        scheduleList.addSchedule(initializeList3);
+        scheduleList.addSchedule(initializeList4);
+        scheduleList.addSchedule(initializeList5);
+        scheduleList.addSchedule(initializeList6);
+        scheduleList.addSchedule(initializeList7);
+        scheduleList.addSchedule(initializeList8);
+        scheduleList.addSchedule(initializeList9);
+        scheduleList.addSchedule(initializeList10);
+        scheduleList.addSchedule(initializeList11);
+        scheduleList.addSchedule(initializeList12);
+        scheduleList.addSchedule(initializeList13);
+        scheduleList.addSchedule(initializeList14);
+        scheduleList.addSchedule(initializeList15);
+        scheduleList.addSchedule(initializeList16);
+        scheduleList.addSchedule(initializeList17);            
+        scheduleList.addSchedule(initializeList18);
+        scheduleList.addSchedule(initializeList19);
+        scheduleList.addSchedule(initializeList20);
+        scheduleList.addSchedule(initializeList21);
+        scheduleList.addSchedule(initializeList22);
+        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
+            jcbDeliveryman.addItem(scheduleList.getSchedule(i).getStaffID());
+//            jcbDeliveryman.addActionListener(jcbOrderNo);
         }
-        //generate item for order number
-        for(int i = 0; i<;i++){
-            
+        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
+            jcbOrderNo.addItem(scheduleList.getSchedule(i).getOrderID());
         }
     }
 }

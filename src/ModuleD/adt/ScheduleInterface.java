@@ -15,6 +15,7 @@ public interface ScheduleInterface<T> {
 //    public boolean replaceSchedule(int position, T newSchedule);
     public T getSchedule(int position);
     public T updateSchedule(int position);
+    public int getNumberOfSchedule();
     public boolean isEmpty(); 
 //    public boolean clearSchedule();
 }

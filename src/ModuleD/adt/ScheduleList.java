@@ -9,12 +9,12 @@ package ModuleD.adt;
  *
  * @author Alex Ng
  */
-public class ScheduleStack<T> implements ScheduleInterface<T> {
+public class ScheduleList<T> implements ScheduleInterface<T> {
     
     private ScheduleNode<T> firstSchedule;
     private int numberOfSchedule;
     
-    public ScheduleStack(){
+    public ScheduleList(){
         
     }
     
