@@ -25,9 +25,7 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
           numberOfMen = 0;
         }
         
-        public String toReportString(){
-            return " ";
-        }
+        
 
         @Override
         public boolean createProfile (T deliEntry){
@@ -44,8 +42,34 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
             numberOfMen++;
             return true;
          }
-   
-  
+        
+        @Override
+        public T getSelectedProfile(int Id){
+            T result = null;
+            DeliveryManNode currentMan = firstMan;
+            for (int counter = 1; counter <= numberOfMen; counter++) {
+                DeliveryMan temp = (DeliveryMan)currentMan.man; 
+                if(temp.getStaffID() == Id){
+                   result =(T)currentMan.man;
+                }else{
+                    currentMan = currentMan.nextMan;
+                }
+            }
+            return result;
+        }
+          
+        @Override
+        public String toString() {
+            String outputString = String.format("%-18s%-18s%-23s%-20s%-18s%-18s%-30s%-20s%-18s%-18s%-18s%-10s%-16s\n","Staff name","StaffID","PhoneNo","Address","Status","Gender","ICNO","Salary","DeliveryState","Pendingjobs","TotalDeliveries","Distance","YearsServ");
+            DeliveryManNode<T> currentMan = firstMan;
+            while (currentMan != null){
+                outputString += "" + currentMan.man + "\n";
+                currentMan = currentMan.nextMan;
+            }
+           
+            return outputString;
+        }       
+        
         @Override
         public void setDeliveryStatus(int Id,String status,boolean pending,boolean completed){
             DeliveryManNode<T> currentMan = firstMan;

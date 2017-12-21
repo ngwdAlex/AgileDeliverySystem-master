@@ -5,6 +5,8 @@
  */
 package ModuleD.adt;
 
+import ModuleD.entity.Schedule;
+
 /**
  *
  * @author Alex Ng
@@ -45,6 +47,24 @@ public class ScheduleADT<T> implements ScheduleInterface<T> {
         T result = null;
         result = (T)getNodeAt(position+1).schedule;
         return result;
+    }
+    
+    @Override
+    public String getPendingList(int Id){
+        String outputString ="";
+        int counter =0; // count the pending task
+                for(int a = 0; a < numberOfSchedule ;a++){
+                    Schedule sche = (Schedule)getSchedule(a);
+                    if(sche.getStaffID()== Id){
+                        if(sche.getDeliveryStatus().equals("Delivering")){
+                            outputString += sche.toShortString()+ "\n";
+                            counter++;
+                        }
+                        
+                    }
+                }
+        outputString+= "\nTotal Pending jobs:" + counter; 
+        return outputString;
     }
     
     public boolean isEmpty(){

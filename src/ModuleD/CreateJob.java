@@ -36,8 +36,9 @@ public class CreateJob extends javax.swing.JFrame {
      * Creates new form CreateJob
      */
     public CreateJob() {
-        initialize();
         initComponents();
+        initialize();
+        
     }
 
     /**
@@ -152,12 +153,14 @@ public class CreateJob extends javax.swing.JFrame {
 
     private void btnAssignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAssignMouseClicked
         Object selectedDeliveryman = jcbDeliveryman.getSelectedItem();
+        int selectedDelivery = jcbDeliveryman.getSelectedIndex();
         int deliveryman = (int)selectedDeliveryman;
-        jcbDeliveryman.removeItemAt((int)selectedDeliveryman);
+        jcbDeliveryman.removeItemAt(selectedDelivery);
         Object order = jcbOrderNo.getSelectedItem();
-        int orderNo = (int)order;
-        jcbOrderNo.removeItemAt(orderNo);
-        Schedule schedule = new Schedule(deliveryman, (String)order);
+        int selectedOrder = jcbOrderNo.getSelectedIndex();
+        String orderNo = String.valueOf(order);
+        jcbOrderNo.removeItemAt(selectedOrder);
+        Schedule schedule = new Schedule(deliveryman,orderNo);
         scheduleList.addSchedule(schedule);
 //        scheduleList.addSchedule(deliveryman,orderNo);
         System.out.print(scheduleList);
@@ -165,7 +168,14 @@ public class CreateJob extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAssignMouseClicked
 
     private void jcbDeliverymanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDeliverymanActionPerformed
-        //get selected item > display deliveryman name
+        String selected = String.valueOf(jcbDeliveryman.getSelectedItem());
+        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
+            int staff = scheduleList.getSchedule(i).getStaffID();
+            if(String.valueOf(staff).equals(selected)){
+                String name = scheduleList.getSchedule(i).getStaffName();
+                lblDeliverymanName.setText(name);
+            }
+        }
     }//GEN-LAST:event_jcbDeliverymanActionPerformed
 
     /**
@@ -273,11 +283,18 @@ public class CreateJob extends javax.swing.JFrame {
         
 
         for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
-            jcbDeliveryman.addItem(scheduleList.getSchedule(i).getStaffID());
+            int staff = scheduleList.getSchedule(i).getStaffID();
+            jcbDeliveryman.addItem(staff);
+            
+            String order = scheduleList.getSchedule(i).getOrderID();
+            jcbOrderNo.addItem(order);
+
+        }
+        
+        
 //            jcbDeliveryman.addActionListener(jcbOrderNo);
-        }
-        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
-            jcbOrderNo.addItem(scheduleList.getSchedule(i).getOrderID());
-        }
+//        for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
+//            jcbOrderNo.addItem(scheduleList.getSchedule(i).getOrderID());
+//        }
     }
 }

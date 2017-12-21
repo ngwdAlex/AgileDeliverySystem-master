@@ -13,7 +13,11 @@ public interface DeliveryProfileInterface<T> {
         public void clear() ;
         //clear the profile
         public boolean createProfile (T deliEntry);
-        //create profile for deliveryman using deliveryman enitity
+        //create profile for deliveryman using deliveryman enitity 
+        public T getSelectedProfile(int Id);
+        //pass in id , get the selected profile
+        public String toString() ;
+        // return all entries
         public void setDeliveryStatus(int Id,String status,boolean pending,boolean completed);
         // For Module D
         public T getPositionProfile(int givenPosition);
