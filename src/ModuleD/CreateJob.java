@@ -6,11 +6,11 @@
 package ModuleD;
 import ModuleD.entity.Schedule;
 import ModuleD.adt.ScheduleInterface;
-import ModuleB.adt.*;
-import ModuleB.entity.*;
+//import ModuleB.adt.*;
+//import ModuleB.entity.*;
 //import ModuleC.adt.ListInterface;
-import ModuleC.adt.OrderInterface;
-import ModuleC.entity.*;
+//import ModuleC.adt.OrderInterface;
+//import ModuleC.entity.*;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
  */
 public class CreateJob extends javax.swing.JFrame {
 //    public static ScheduleInterface<Schedule> scheduleQueue = new ScheduleQueue<>();
-    public static ScheduleInterface<Schedule> scheduleList = new ModuleD.adt.ScheduleList<>();
+    public static ScheduleInterface<Schedule> scheduleList = new ModuleD.adt.ScheduleADT<>();
 //    public static ScheduleInterface<Schedule> scheduleList = new ScheduleList<>();
-    public static OrderInterface<Order> orderList = new ModuleC.adt.OrderQueue<>();
+//    public static OrderInterface<Order> orderList = new ModuleC.adt.OrderQueue<>();
     
     public void setList(ScheduleInterface<Schedule> scheduleList){
         this.scheduleList = scheduleList;
@@ -151,12 +151,16 @@ public class CreateJob extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAssignMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAssignMouseClicked
-        int deliveryman = jcbDeliveryman.getSelectedIndex();
-        //~~insert code for passing deliverymanNumber~~
-        jcbDeliveryman.removeItemAt(deliveryman);
-        int orderNo = jcbOrderNo.getSelectedIndex();
-        //~~insert code for passing orderNo~~
+        Object selectedDeliveryman = jcbDeliveryman.getSelectedItem();
+        int deliveryman = (int)selectedDeliveryman;
+        jcbDeliveryman.removeItemAt((int)selectedDeliveryman);
+        Object order = jcbOrderNo.getSelectedItem();
+        int orderNo = (int)order;
         jcbOrderNo.removeItemAt(orderNo);
+        Schedule schedule = new Schedule(deliveryman, (String)order);
+        scheduleList.addSchedule(schedule);
+//        scheduleList.addSchedule(deliveryman,orderNo);
+        System.out.print(scheduleList);
         JOptionPane.showMessageDialog(null, "Delivery job has successfully assigned!");
     }//GEN-LAST:event_btnAssignMouseClicked
 
@@ -265,6 +269,9 @@ public class CreateJob extends javax.swing.JFrame {
         scheduleList.addSchedule(initializeList20);
         scheduleList.addSchedule(initializeList21);
         scheduleList.addSchedule(initializeList22);
+        
+        
+
         for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
             jcbDeliveryman.addItem(scheduleList.getSchedule(i).getStaffID());
 //            jcbDeliveryman.addActionListener(jcbOrderNo);

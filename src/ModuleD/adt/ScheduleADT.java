@@ -9,12 +9,12 @@ package ModuleD.adt;
  *
  * @author Alex Ng
  */
-public class ScheduleList<T> implements ScheduleInterface<T> {
+public class ScheduleADT<T> implements ScheduleInterface<T> {
     
     private ScheduleNode<T> firstSchedule;
     private int numberOfSchedule;
     
-    public ScheduleList(){
+    public ScheduleADT(){
         
     }
     
@@ -34,7 +34,7 @@ public class ScheduleList<T> implements ScheduleInterface<T> {
     private ScheduleNode<T> getNodeAt(int position){
         ScheduleNode<T> current = firstSchedule;
         
-        for(int i = 1; 1 < position; i++){
+        for(int i = 1; i < position; i++){
             current = current.nextSchedule;
         }
         return current;
@@ -68,6 +68,7 @@ public class ScheduleList<T> implements ScheduleInterface<T> {
 //        T updates = ; //update code 
         return result;
     }
+    
     private class ScheduleNode<T>{
         private T schedule;
         private ScheduleNode nextSchedule;
@@ -83,7 +84,15 @@ public class ScheduleList<T> implements ScheduleInterface<T> {
         }
     }
     
-    
+//    public String toStringSchedule(){
+//        String s = "";
+//        boolean exception = true;
+//        while(firstSchedule!=null){
+//            s += firstSchedule.schedule.toString() + "\n";
+//            firstSchedule = firstSchedule.nextSchedule;
+//        }
+//        return s;
+//    }
 //    @Override
 //    public boolean isEmpty(){
 //        return (this.firstSchedule == null) && (numberOfSchedule == 0);

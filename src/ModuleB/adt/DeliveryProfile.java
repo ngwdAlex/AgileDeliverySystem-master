@@ -25,7 +25,9 @@ public class DeliveryProfile<T> implements DeliveryProfileInterface<T> {
           numberOfMen = 0;
         }
         
-        
+        public String toReportString(){
+            return " ";
+        }
 
         @Override
         public boolean createProfile (T deliEntry){
