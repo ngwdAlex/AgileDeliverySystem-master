@@ -19,6 +19,8 @@ public class ClockIn extends javax.swing.JFrame {
     public int minuteStart =0;
     public int hourEnd =0;
     public int minuteEnd =0;
+    public String periodIn = "";
+    public String periodOut= "";
     /**
      * Creates new form ClockIn
      */
@@ -206,15 +208,22 @@ public class ClockIn extends javax.swing.JFrame {
         String period = String.valueOf(jcbPeriods.getSelectedItem());
 //        lblStatus.setText("Clocked out at " + hours + ":" + minutes + " " + period);
 //        jPanel1.setVisible(true);
-        
+        periodOut = period;
+        hourEnd = hours;
         if(period == "PM"){
             hourEnd = hours + 12;
-        }else if(period == "AM"){
-            hourEnd = hours +24;
+        }else if(period == "AM" && !periodIn.equals(periodOut)){
+//            if(!periodIn.equals(periodOut)){
+                hourEnd = hours +24;
+//            }else{
+//                hourEnd = hours;
+//            }
         }else{
-            hourEnd = hours;
+           
         }
-        
+//        if(periodOut != periodIn){
+//            
+//        }
         minuteEnd = Integer.parseInt((String)jcbMinutes.getSelectedItem());
         
         if(minuteEnd < minuteStart && minuteEnd != minuteStart){
@@ -239,6 +248,7 @@ public class ClockIn extends javax.swing.JFrame {
         String period = String.valueOf(jcbPeriods.getSelectedItem());
 //        lblStatus.setText("Clocked in at " + hours + ":" + minutes + " " + period);
 //        jPanel3.setVisible(true);
+        periodIn = period;
         
         if(period == "PM"){
             hourStart = hours + 12;
