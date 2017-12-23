@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package ModuleD;
+import ModuleB.adt.DeliveryProfile;
+import ModuleB.adt.DeliveryProfileInterface;
+import ModuleB.entity.DeliveryMan;
 import ModuleD.entity.Schedule;
 import ModuleD.adt.ScheduleInterface;
 //import ModuleB.adt.*;
@@ -20,6 +23,7 @@ import javax.swing.JOptionPane;
 public class CreateJob extends javax.swing.JFrame {
 //    public static ScheduleInterface<Schedule> scheduleQueue = new ScheduleQueue<>();
     public static ScheduleInterface<Schedule> scheduleList = new ModuleD.adt.ScheduleADT<>();
+    public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryProfile<>();
 //    public static ScheduleInterface<Schedule> scheduleList = new ScheduleList<>();
 //    public static OrderInterface<Order> orderList = new ModuleC.adt.OrderQueue<>();
     
@@ -31,7 +35,13 @@ public class CreateJob extends javax.swing.JFrame {
         return this.scheduleList;
     }
     
+    public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
+        this.deliveryProfileList = deliveryProfileList;   // setter for super list object
+    }
     
+    public DeliveryProfileInterface<DeliveryMan> getProfileList (){
+        return this.deliveryProfileList;      // getter for super list object
+    }
     /**
      * Creates new form CreateJob
      */
@@ -177,7 +187,9 @@ public class CreateJob extends javax.swing.JFrame {
         scheduleList.addSchedule(schedule);
 //        scheduleList.addSchedule(deliveryman,orderNo);
 //        System.out.print(scheduleList);
+        
         //set status to delivering
+        deliveryProfileList.setDeliveryStatus(deliveryman, "Delivering", true ,false); 
         JOptionPane.showMessageDialog(null, "Delivery job has successfully assigned!");
     }//GEN-LAST:event_btnAssignMouseClicked
 

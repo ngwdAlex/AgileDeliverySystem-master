@@ -5,6 +5,9 @@
  */
 package ModuleD;
 
+import ModuleB.adt.DeliveryProfile;
+import ModuleB.adt.DeliveryProfileInterface;
+import ModuleB.entity.DeliveryMan;
 import ModuleD.adt.ScheduleInterface;
 import ModuleD.entity.Schedule;
 import javax.swing.JOptionPane;
@@ -16,13 +19,23 @@ import javax.swing.JOptionPane;
 public class DeleteCompleteJob extends javax.swing.JFrame {
 
     public static ScheduleInterface<Schedule> scheduleList = new ModuleD.adt.ScheduleADT<>();
+    public static DeliveryProfileInterface<DeliveryMan> deliveryProfileList = new DeliveryProfile<>();
     boolean flag = false;
+    int deliveryNo;
 //    String[] order = {"1234", "2654"};
     /**
      * Creates new form DeleteCompleteJob
      */
     public void setList(ScheduleInterface<Schedule> scheduleList){
         this.scheduleList = scheduleList;
+    }
+    
+    public void setList (DeliveryProfileInterface<DeliveryMan> deliveryProfileList){
+        this.deliveryProfileList = deliveryProfileList;   // setter for super list object
+    }
+    
+    public DeliveryProfileInterface<DeliveryMan> getProfileList (){
+        return this.deliveryProfileList;      // getter for super list object
     }
     
     public ScheduleInterface<Schedule> getList(){
@@ -167,7 +180,7 @@ public class DeleteCompleteJob extends javax.swing.JFrame {
 
     private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
         reset();
-        int deliveryNo = Integer.parseInt(jtfDeliverymanNumber.getText());
+        deliveryNo = Integer.parseInt(jtfDeliverymanNumber.getText());
         boolean result = false;
         for(int i = 0; i<scheduleList.getNumberOfSchedule();i++){
             int id =  scheduleList.getSchedule(i).getStaffID();
@@ -206,6 +219,7 @@ public class DeleteCompleteJob extends javax.swing.JFrame {
                 lblCurrent.setText("");
                 lblDeliverymanName.setText("");
                 btnComplete.setEnabled(false);
+                deliveryProfileList.setDeliveryStatus(deliveryNo, "Available", false ,true);
             }
     }//GEN-LAST:event_btnCompleteActionPerformed
 
