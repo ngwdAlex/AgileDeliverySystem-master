@@ -155,6 +155,7 @@ public class DeleteCompleteJob extends javax.swing.JFrame {
     private void btnCompleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCompleteMouseClicked
         int option = JOptionPane.showConfirmDialog(null, "Do you want to complete this order?");
         if(option == JOptionPane.YES_OPTION){
+            //insert code for complete, add complete count, decrease pending count
             JOptionPane.showMessageDialog(null, "Order has been completed and removed from current list");
             jtfDeliverymanNumber.setText("");
             lblCurrent.setText("");
